@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //dfs是深度优先遍历的首字母缩写；
+         const tree={
+             val:'a',
+             child:[
+                {
+                    val:'b',
+                    child:[
+                    {
+                    val:'d',
+                    child:[],
+                },
+                    {
+                    val:'e',
+                    child:[]
+                }
+                    ]
+                },{
+                    val:'c',
+                    child:[
+                    {
+                    val:'f',
+                    child:[],
+                },
+                    {
+                    val:'g',
+                    child:[],
+                }
+                    ]
+                }
+             ]
+         }
+         const dfs=(root)=>{
+             console.log(root.val);
+             //遍历child 的数据
+             root.child.forEach(dfs);
+         }
+         //递归函数 调用自己然后遍历json
+         dfs(tree);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

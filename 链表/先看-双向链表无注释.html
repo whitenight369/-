@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h3{
+            color: blue;
+        }
+    </style>
+    <script>
+        //创建一个大的构造器函数
+        function DoubleLink(){
+            //里面创建一个小的构造器函数用于做添加数据的准备
+            function Node(data){
+                this.next=null;
+                this.data=data;
+                this.prev=null;
+            }
+            this.head=null;
+            this.tail=null;
+            this.length=0;
+
+
+            //往链表里面添加数据
+            DoubleLink.prototype.append=function(data){
+                var newNode=new Node(data);
+                if(!this.head){
+                    
+                    this.head=newNode;
+                    this.tail=newNode;
+                }else{
+                    this.tail.next=newNode;
+                    newNode.prev=this.tail;
+                    this.tail=newNode;
+                }
+                this.length++//长度加一
+            }
+
+
+            //移除链表元素
+            DoubleLink.prototype.removeAt=function(position){
+                if(this.length==1){
+                    this.head=null;
+                    this.tail=null;
+                }else{ 
+                    if(position==0){
+                        this.head.next.prev=null;
+                        this.head=this.head.next;
+                    }else
+                    if(position==this.length-1){
+                    this.tail.prev.next=null;
+                    this.tail=this.tail.prev;
+                }else{
+                    var current=this.head;
+                    var index=0;
+                    while(index++<position){
+                        current=current.next;
+                    }
+                    current.next.prev=current.prev;
+                    current.prev.next=current.next;
+                }
+            }
+                this.length--;
+            }
+
+            //从前向后遍历链表
+            DoubleLink.prototype.backward=function(){
+                var current=this.head;
+                var str='';
+                while(current){
+                    str+=current.data+' ';
+                    current=current.next;
+                }
+                return str;
+            }
+
+            //从后向前遍历链表
+            DoubleLink.prototype.forward=function(){
+            var current=this.tail;
+            var str="";
+            while(current){
+                str=str+current.data+' ';
+                current=current.prev;
+            }
+            return str;
+            }
+
+            //字符串显示
+            DoubleLink.prototype.toString=function(){
+               return this.backward();
+            }
+
+            //向指定位置添加链表元素  参数是添加位置和参数的data
+            DoubleLink.prototype.insert=function(position,data){
+                var newNode=new Node(data);
+                if(position<0||position>this.length){
+                    return false;
+                }
+                if(!this.head){
+                    this.head=newNode;
+                    this.tail=newNode;
+                }else{
+                    if(position==0){
+                        this.head.prev=newNode;
+                        newNode.next=this.head;
+                        this.head=newNode;
+                    }else if(position==this.length){
+                        this.tail.next=newNode;
+                        newNode.prev=this.tail;
+                        this.tail=newNode;
+                    }else{
+                        var current=this.head;
+                        var index=0;
+                        while(index++<position){
+                            current=current.next;
+                        }
+                        newNode.next=current;
+                        newNode.prev=current.prev;
+                        current.prev.next=newNode;
+                        current.prev=newNode;
+                    }
+                }
+                this.length++;
+                return true;
+            }
+
+            //检索链表
+            DoubleLink.prototype.indexOf=function(data){
+                var current=this.head;
+                var index=0;
+                while(current){
+                    if(current.data==data){
+                        return index;
+                    }
+                    current=current.next;
+                    index++;
+                }
+                return -1;
+            }
+
+            DoubleLink.prototype.get=function(position){
+                var current=this.head;
+                var index=0;
+                while(index++<position){
+                    current=current.next;
+                }
+                return current.data;
+            }
+
+
+            DoubleLink.prototype.updata=function(position,newData){
+                var current=this.head;
+                var index=0; 
+                while(index++<position){
+                    current=current.next;
+                }
+                current.data=newData;
+                return current.data;
+            }
+
+        }
+        var a=new DoubleLink;
+        a.append('aaa');
+        a.append('bbb');
+        a.append('ccc');
+        console.log(a);
+      console.log(a.updata(0,'a'));
+      console.log(a.updata(2,'c'));
+    </script>
+</head>
+<body>
+        <h3>ppt的图挺好的   配合看就很赞</h3>
+      <h3>要是这个都能看懂就别看注释版的了  意义不大</h3>
+      <!-- 老八出品 一定简单易懂 但是不一定是精品 哈哈哈 -->
+</body>
+</html>

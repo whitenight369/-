@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 快慢指针  一个一次走两步 一个一次走一步  然后快的走到头 慢的指向就是中间
+        function test(head){
+            let  left=head;
+            let right=head;
+            while(right.next){
+                right=right.next.next?right.next.next:0;//这里用boolean判断一下 是否有值 没有值会报错
+                left=left.next;
+            }
+            return left;
+        }
+    </script>
+</head>
+<body>
+    <!-- 
+        给一个非空节点  返回链表的中间节点
+        输入：[1,2,3,4,5]
+        输出：此列表中的结点 3 (序列化形式：[3,4,5])
+     -->
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         Array.prototype.selectionSort = function () {
+                for (i = 0; i < this.length - 1; i++) {
+                    let indexMin = i;
+                    //声明一个最小值的下标 为0；
+                    for (j = 1+i; j < this.length; j++) {
+                        // 0依次和数组中的每个数比较 一共比较长度-1次
+                        if (this[j] < this[indexMin]) {
+                            // 如果后面有元素比arr[i]小 那么就改变最小元素的索引
+                            indexMin = j;
+                        }
+                    }
+                    // 一次比较结束之后 将最小元素的位置和arr[i]交换
+                    //跟自己不需要交换
+                    if (indexMin !== i) {
+                        // 设置一个变量 临时存储arr[i]的值   因为后面有值比他小 应该在这个位置上 所以他需要跑到后面去
+                        const temp = this[i];
+                        // 然后将最小元素的赋值过来
+                        this[i] = this[indexMin];
+                        // 用刚才临时变量 交换最小元素索引的值
+                        this[indexMin] = temp;
+                    }
+                }
+            };
+            const arr = [5,4,3,2,1,99,-50,555,-8,333,77];
+            arr.selectionSort();
+            console.log(arr);
+    </script>
+</head>
+<body>
+    <!--      选择排序:找到数组中的最小值,选中并将放到第一位,找到第二小的值,选择放到第二位 n-1轮 -->
+    <!-- 时间复杂度  O（n^2） -->
+</body>
+</html>

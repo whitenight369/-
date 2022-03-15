@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var removeNthFromEnd = function (head, n) {
+            // 创建两个指针 一个快 一个慢
+            let p1 = head;
+            let p2 = head;
+            // 快指针先走n步
+            for (let i = 1; i < n + 1; i++) {
+                p1 = p1.next;
+            }
+            if (!p1) { return head.next }// 删除最后一个节点 
+            // 之后一起走 当快指针走到最后 慢指针就到了删除节点上
+            while (p1.next) {
+                p1 = p1.next;
+                p2 = p2.next;
+            }
+            // 删除节点 
+            p2.next = p2.next.next;
+            // 返回头部
+            return head;
+        };
+    </script>
+</head>
+<body>
+    <!--
+         给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+        最好一次循环完成
+    -->
+</body>
+</html>

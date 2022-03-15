@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+    //创建一个变量存储利润
+    let proit=0;
+    //遍历每天的价格
+    for(i=1;i<prices.length;i++){
+        //如果明天比今天的价钱高就买入 并且计算利润放到利润值中
+        if(prices[i]>prices[i-1]){
+            proit+=prices[i]-prices[i-1];
+        }
+    }
+    //返回利润值。
+    return proit;
+};
+    </script>
+</head>
+<body>
+    <!-- 时间n  空间1 -->
+</body>
+</html>

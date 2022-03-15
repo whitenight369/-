@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+root=[1,null,2,3];
+
+//这是递归版的  比较简单
+var inorderTraversal = function(root) {
+    //先创建一个结果的数组
+    const res=[];
+    //开始中序遍历root
+    const rec=(n)=>{
+        if(!n){return ;};
+        rec(n.left);
+        res.push(n.val);
+        rec(n.right);
+    }
+    rec(root);
+    return res;
+};
+
+//下面是栈版的迭代版
+var inorderTraversal = function(root) {
+    const res=[];
+    const stack=[];//创建一个栈
+    let p=root;//创建一个指针指向root；
+    while(stack.length||p){
+        while(p){
+            //当p有值的时候 将p的值推到栈内  先进后出 ；最后就能先出左节点再出根元素；
+            stack.push(p);
+            p=p.left;//指针向左走 走一步推进去一个；
+        }
+        const n=stack.pop();
+        //创建一个变量接收左边子节点的值
+        res.push(n.val);
+        //将值推入res中
+        p=n.right;
+        //p指向右
+    }
+    return res;
+};
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

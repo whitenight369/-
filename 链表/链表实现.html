@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var a={ val:'a'};
+        var b={ val:'b'};
+        var c={ val:'c'};
+        var d={val:'d'};
+        a.next=b;
+        b.next=c;
+        c.next=d;
+        //遍历链表
+        console.log(a);
+        var p=a;
+        while(p){
+            console.log(p.val);
+            p=p.next;
+        }
+        //插入值
+        var e={val:'e'};
+        //插入到cd之间
+        c.next=e;
+        e.next=d;
+        //删除
+        c.next=d;
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

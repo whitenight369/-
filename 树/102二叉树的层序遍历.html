@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+var levelOrder = function(root) {
+    if(!root){return [];};
+    const q=[[root,0]];
+    const res=[];
+    while(q.length){
+        const [n,l]=q.shift();
+        if(!res[l]){
+            res.push([n.val]);
+        }else{
+            res[l].push(n.val);
+        }
+        if(n.left){q.push([n.left,l+1])};
+        if(n.right){q.push([n.right,l+1]);}
+    }
+    return res;
+};
+var levelOrder = function(root) {
+    if(!root){return [];};
+    const q=[root];
+    const res=[];
+    while(q.length){
+        res.push([])
+        let len=q.length;
+        while(len--){
+            //第一次只有一个层级  第二次都是他的子代 也是一个层级
+        const n=q.shift();
+        res[res.length-1].push(n.val);
+        if(n.left){q.push(n.left)};
+        if(n.right){q.push(n.right)}
+        }
+        
+    }
+    return res;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

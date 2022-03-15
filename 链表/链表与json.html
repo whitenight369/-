@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const json={
+            a:{b:{c:1}},
+            d:{e:2}
+        }
+        const path=['d','e'];
+        let p=json;
+        path.forEach(k=>{
+            //k就是path里面的d  e foreach就是每个元素都要用到
+            p=p[k];
+            //从p里面找k的属性值   p=["d"]  p['d']['e']
+        });
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

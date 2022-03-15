@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let mySet=new Set();
+        mySet.add(1);
+        mySet.add(5);
+        mySet.add(5);
+        mySet.add('some text');
+        let o={a:1,b:2};
+        mySet.add(o);
+        mySet.add({a:1,b:2});
+        //对象存的是内存块的首地址;
+
+
+        const has=mySet.has('sone text');
+
+        //操作会改变原数组；
+        mySet.delete(5);
+
+        //迭代
+        for(let item of mySet) console.log(item);
+        for(let item of mySet.keys()) console.log(item);
+        for(let item of mySet.values()) console.log(item);
+
+        //set和array互相转换   set--->array
+        const myArr=[...mySet];
+        const myArr2=Array.from(mySet);
+        //array--->set
+        const mySet2=new Set([1,2,3,4]);
+
+        //交集
+        const intersecion=new Set([...mySet].filter(x=>mySet2))
+        console.log(intersecion)
+        //差集
+        const intersecion1=new Set([...mySet].filter(x=>!mySet2))
+        console.log(intersecion1)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

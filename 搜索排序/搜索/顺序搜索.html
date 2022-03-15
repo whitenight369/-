@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        Array.prototype.sequentialSearch = function (item) {
+                for (let i = 0; i < this.length; i++) {
+                    if (this[i] === item) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+            const res = [1, 2, 3, 4, 5].sequentialSearch(3);
+            console.log(res);
+    </script>
+</head>
+<body>
+    <!--  --顺序搜索:---遍历数组  ---找到跟目标值相等的元素，就返回它的下标  ----效率不高 入门可以 
+    时间复杂度:O（n） -->
+</body>
+</html>

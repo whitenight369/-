@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //头尾不能同时获得.
+        /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    const length = nums.length;
+    if (length === 1) {
+        //如果只有一家 就只能选择这家
+        return nums[0];
+    } else if (length === 2) {
+        //如果有两家 就选择大的
+        return Math.max(nums[0], nums[1]);
+    }
+    //不然就返回其他方式   nums是钱的数组  起始位置  因为length比角标大1 所以要减2
+    return Math.max(robRange(nums, 0, length - 2), robRange(nums, 1, length - 1));
+};
+
+const robRange = (nums, start, end) => {
+    //最少三家人
+    //    起始位置              比较起始和起始的下一家谁钱更多                
+    let low = nums[start], high = Math.max(nums[start], nums[start + 1]);
+    //下面开始一个循环start+2 是因为0家和1家的情况不会出现在这里面  小于结尾位置就可以了
+    for (let i = start + 2; i <= end; i++) {
+        //创建一个临时变量存三家里面最大的那个值   
+        const temp = high;
+        //因为这里是不用考虑环形的 所以直接用198的方法就行
+        //
+        high = Math.max(low + nums[i], high);
+        low = temp;
+    }
+    return high;
+}
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+var hasPathSum = function(root, targetSum) {
+    if(!root){return false;};
+    //空的树啥也没有返回false
+    let sum=targetSum;
+    let res=false;
+    //设置初始的返回值为false 如果有接更改为true
+    const dfs=(n,s)=>{
+        //开始深度优先遍历--->递归 调用自己 不断打印自己
+        if(!n.left && !n.right &&s===sum){
+            //如果是叶子节点 即是左右两边都没有数据 并且 sum为想要的值 更改res为true
+            res=true;
+        }
+        if(n.left){
+            //没有到达叶子就一直遍历 向下遍历的同时加和 到叶子节点开始对比
+            dfs(n.left,s+n.left.val)
+        }
+        if(n.right){dfs(n.right,n.right.val+s);}
+    }
+    dfs(root,root.val);
+    return res;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

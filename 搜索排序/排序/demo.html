@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function ArrayList1(){
+            this.array=[];
+            ArrayList1.prototype.insert = function (item) {
+            this.array.push(item)
+        }
+        ArrayList1.prototype.toString = function () {
+            return this.array.join()
+        }
+            
+            ArrayList1.prototype.shellSort=function(){
+                var length=this.array.length;
+                var gap=Math.floor(length/2);
+                while(gap>=1){
+                    for(var i=gap;i<length;i++){
+                        var temp=this.array[i];
+                        var j=i;
+                        if(this.array[i-gap]>this.array[j]&&j>gap){
+                            this.array[j]=this.array[j-gap];
+                            j=j-gap;
+                        }
+                        this.array[j]=temp;
+                    }
+                    gap=Math.floor(gap/2);
+                }
+            }
+        }
+        var a1=new ArrayList1();
+    a1.insert(1);
+    a1.insert(5648);
+    a1.insert(5550);
+    a1.insert(66);
+    a1.insert(23);
+    alert(a1);
+    a1.shellSort();
+    alert(a1);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

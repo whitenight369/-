@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number[]} g
+ * @param {number[]} s
+ * @return {number}
+ */
+var findContentChildren = function(g, s) {
+    //如果sort里面是负数 就不交换位置  是整数就交换两个元素的位置
+    const sortfun=function(a,b){
+        return a-b;
+    }
+    //升序排列
+    g.sort(sortfun);
+    s.sort(sortfun);
+    //创建一个变量 为孩子的指针
+    let i=0;
+    //遍历饼干的数组 后面的饼干比前面的大 后面的孩子胃口也比前面的大 所以用小的喂小的
+    s.forEach(n=>{
+        if(n>=g[i]){
+            //这个孩子满足了就换下一个孩子
+            i=++i;
+        }
+    })
+    return i;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

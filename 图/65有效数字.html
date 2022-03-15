@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {string} s
+ * @return {boolean}
+ */
+ //将数字传过来之后执行函数   for循环 每个字符都执行一次 最后返回‘’
+
+var isNumber = function(s) {
+    const graph={
+        0:{'blank':0,'sign':1,'.':2,'digit':6},
+        1:{'digit':6,'.':2},
+        2:{'digit':3},
+        3:{'digit':3,'e':4},
+        4:{'digit':5,'sign':7},
+        5:{'digit':5},
+        6:{'digit':6,'.':3,'e':4},
+        7:{'digit':5},
+    };
+//先将邻接表写出
+    let state=0;
+    for( c of s.trim()){
+        if(c>='0'&&c<='9'){
+            c='digit';
+        }else if(c===' '){
+            c='blank';
+        }else if(c==='+'||c==='-'){
+            c='sign';
+        }else if(c==='E'){
+            c='e';
+        }
+        //转换字符为邻接表字符
+        state=graph[state][c];
+        //state就是最后的状态数字
+        if(state==undefined){
+            return false;
+        }     
+    }
+     if(state==3||state==6||state==5){
+            return true;
+        }
+        return false;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

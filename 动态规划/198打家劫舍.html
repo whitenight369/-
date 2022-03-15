@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    if(nums.length===0){return 0;};
+    //因为0人家就是没钱就是0 所以比nums正好多出一位 nums[0]实际上是dp[1]
+    const dp=[0,nums[0]];
+    for(let i=2;i<=nums.length;i++){
+        //每次都将之前能打劫到的钱的最大总和都加到一起输入到数组dp中   比如只有两户就是1或者2 有三户就是1+3或者2  输入今dp的数组中。
+        dp[i]=Math.max(dp[i-2]+nums[i-1],dp[i-1]);
+    }
+    //因为 nums数组的长度和dp角标相对应 所以直接用nums的长度当做角标就ok
+    return dp[nums.length];
+};
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var rob = function(nums) {
+    if(nums.length===0){return 0;};
+    let dp0=0;
+    let dp1=nums[0]
+    for(let i=2;i<=nums.length;i++){
+        const dp2=Math.max(dp0+nums[i-1],dp1);
+        dp0=dp1;
+        dp1=dp2;
+    }
+    return dp1;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

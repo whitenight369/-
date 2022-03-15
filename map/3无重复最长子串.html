@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let l=0;
+        let res=0;
+        const map=new Map();
+        for(let r=0;r<s.length;r++){
+            //map.get(s[r])>=l是因为‘abbcdea’这里面最后a不会算在内 如果不就与后面的判断条件 小于l的不考虑 比如首位的a 就是正确的计算数值。
+            
+            if(map.has(s[r])&& map.get(s[r])>=l){
+                //如果存在这个键值 并且键值的角标大于等于L
+                l=map.get(s[r])+1;
+                //那么就把L的角标移动过来  把滑窗的长度缩小为1也就是将res缩小为1；
+            }
+            res=Math.max(res,r-l+1);
+            //返回res 和r-l+1的最大值  赋值给res 要加一是以为以角标计算的所以长度+1
+            map.set(s[r],r);
+        }
+        return res;
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

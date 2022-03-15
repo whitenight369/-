@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+          function ListNode(val){
+            this.val=val;
+            this.next=null;
+        }
+        var deleteDuplicates=function(head){
+            let p=head;
+            while(p&&p.next){
+                if(p.val===p.next.val){
+                    p.next=p.next.next
+                }else{
+                    p=p.next;
+                    //为了遍历p的数据
+                }
+            }
+            return head;
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Queue(){
+            var items=[];
+            this.enqueue=function(element){
+                items.push(element);
+            }
+            this.dequeue=function(){
+                return items.shift();
+            }
+            this.front=function(){
+                return items[0];
+            }
+            this.isEmpty=function(){
+                return items.legnth==0;
+            }
+            this.size=function(){
+                return items.legnth
+            }
+           
+        }
+		var queue=new Queue();
+		queue.enqueue("asdf")
+		queue.enqueue("DAsd")
+		queue.enqueue("Da")
+		alert(queue.front())
+		queue.dequeue();
+		console.log(queue)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

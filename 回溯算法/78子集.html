@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var subsets = function(nums) {
+    //创建一个结果集合
+    const res=[];
+    //创建一个递归函数用来创建结果 结果 长度 开始位置;
+    const backtrack=(path,l,start)=>{
+        //长度固定的时候  达到标准就推入res中
+        if(path.length===l){
+            res.push(path);
+            return ;
+        };
+        //创建一个变量等于起始位置  将这个位置的所有可能都遍历一下 用里面的递归
+        for(let i=start;i<nums.length;i++){
+            //递归链接
+            backtrack(path.concat(nums[i]),l,i+1);
+        }
+    };
+    //用循环递归每个长度的结果都是从0开始
+    for(let i=0;i<=nums.length;i++){
+        backtrack([],i,0)
+    }
+    return res;
+};
+    </script>
+</head>
+<body>
+    <!-- 时间n^2  空间n -->
+</body>
+</html>

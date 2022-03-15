@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         Array.prototype.quickSort = function () {
+               const rec=(arr)=>{
+                   //每个数组数量为一的时候就停止递归了  老师讲的少一个极端条件 就是基点左边或者右边没有值得时候 这时候下面判断条件要加一下 当arr的长度为0的时候 也要返回结果数组；
+                   if(arr.length===1||arr.length===0){ return arr;};
+                   //设置左边的数组
+                   const left=[];
+                   //设置右边的数组
+                   const right=[];
+                   //基准就是下标为0的第一个数
+                   const mid=arr[0];
+                   for(let i=1;i<arr.length;i++){
+                       if(arr[i]<mid){
+                           //比基准小的就放进左边
+                           left.push(arr[i]);
+                           
+                       }else{
+                           //比基准大的就放进右边。
+                           right.push(arr[i]);
+                       }
+                   }
+                   //将数组按照下面的顺序添加到一个新数组 并且返回 
+                   return [...rec(left),mid,...rec(right)];
+               }
+               //添加到这个函数作为参数
+               const res=rec(this);
+               //重复之前的操作
+               res.forEach((n,i)=>{this[i]=n});
+            };
+            //Maximum call stack size exceeded超出调用堆栈 就是数组太复杂 这活干不了了
+            const arr = [5,4,3,2,1,99,-50,555,-8,333,77];
+            arr.quickSort();
+            console.log(arr);
+    </script>
+</head>
+<body>
+    <!--     --快速排序:分区:从数组中任意选择一个"基准",所有比基准小的元素放在基准前面,比基准大的元素放在基准后面。  --- 递归:递归的对基准前后的子数组进行分区。 -->
+    <!--时间复杂度  --时间复杂度:递归的是O(logN) 分区的是O(n) 总和是O（n*logN） -->
+</body>
+</html>

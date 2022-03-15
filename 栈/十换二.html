@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		  // 封装栈类
+		  function Stack(){
+			// 栈中的属性
+			this.items=[]
+			// 基于数组显示  以数组形式显示栈的内容  数组外包装了栈
+			// 1.压元素入栈
+			// this.push=function(){
+				
+			// }这个不推荐使用
+			Stack.prototype.push=function(element){
+				this.items.push(element)
+			}
+			// 2.从栈中取出元素
+			Stack.prototype.pop=function(){
+				return this.items.pop()
+			}
+			// 3.查看栈元素  不做修改
+			Stack.prototype.peek=function(){
+				return this.items.peek[this.items.lrength-1]
+			}
+			// 判断是否为空 
+			Stack.prototype.isEmpty=function(){
+				return   this.items.length==0
+			}
+			// 获取元素中的个数
+			Stack.prototype.size=function(){
+				return  this.items.length
+			}
+			// toString
+			Stack.prototype.toString=function(){
+				var resultString="";
+				for(i=1;i<this.items.length;i++){
+					resultString+=this.items[i]=""
+				}
+				return resultString
+			}
+		}
+	// 	var Stack=new Stack();
+	// 	Stack.push(20);
+	// 	Stack.push(999);
+	// 	Stack.push(777);
+	// 	Stack.push(555);
+	// console.log(Stack)
+	// 	alert(Stack.isEmpty())
+	// 	Stack.pop()
+	// 	console.log(Stack)
+	// 	console.log(Stack.toString())
+
+		// 函数  十进制转换成二进制
+		function dec2bin(docNumber){
+			// 1.定义栈对象
+			var stack=new Stack () 
+				// 2.循环步骤  不知道循环几次用while
+				while (docNumber>0) {
+					// 2.1获取余数  并且将之放进栈里
+					stack.push(docNumber%2);
+					// 2.2 获整数的结果  作为下一次计算的数字
+					docNumber=Math.floor(docNumber/2)
+				}
+			
+			// 3.从栈中取出值
+			var binaryString="";
+			while (!stack.isEmpty()) {
+				binaryString=binaryString+stack.pop()
+			}
+			return binaryString
+		}
+		alert(dec2bin(100));
+		console.log(dec2bin(1004));
+		console.log(dec2bin(1050))
+	</script>
+</body>
+</html>

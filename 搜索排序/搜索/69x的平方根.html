@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       /**
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function(x) {
+    let low=0;
+    let high=x;
+    while(low<=high){
+        let mid=Math.floor((low+high)/2);
+        //这里不能用mid-1是因为前面是输出的是mid 后面应该一致 所以用mid+1
+        if(mid*mid==x||(mid+1)*(mid+1)>x&&mid*mid<x){
+            return Math.floor(mid);
+        }
+        if(mid*mid>x){
+            high=mid-1;
+        }else{
+            low=mid+1;
+        }
+    }
+}; 
+    </script>
+</head>
+<body>
+    <!-- 二分搜索 -->
+</body>
+</html>

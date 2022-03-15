@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var permute = function(nums) {
+    //创建一个数组用来存结果
+    const res=[];
+    //创建一个函数用于创造结果 -->path
+    const backtrack=(path)=>{
+        //如果长度和给定的数组长度一样那么就是遍历成功 放到res中然后结束本次遍历
+        if(path.length===nums.length){
+            res.push(path);
+            return ;
+        }
+        //遍历nums的每个数字
+        nums.forEach(n=>{
+            //如果本次递归已经含有这个数字 直接挑出来；
+            if(path.includes(n)){return ;};
+            //没有包含就连接上之前的数字
+            backtrack(path.concat(n));
+        })
+    }
+    backtrack([]);
+    return res;
+};
+    </script>
+</head>
+<body>
+    <!-- 时间n!  空间n -->
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 封装ArrayList
+    function ArrayList() {
+        this.array = []
+        // 向数组内部插入元素
+        ArrayList.prototype.insert = function (item) {
+            this.array.push(item)
+        }
+        //返回的时候为字符串 
+        ArrayList.prototype.toString = function () {
+            return this.array.join()
+        }
+        // 希尔排序
+        ArrayList.prototype.shellSort=function(){
+            // 首先找出数组的长度
+            var length=this.array.length;
+            // 确定间隔   第一次就是长度的二分之一  第二次是四分之一  以此类推
+            var gap=Math.floor(length/2);
+            // 只要间隔大于等于1就一直循环
+            while(gap>=1){
+                // 确定每组的第二个元素
+                for(var i=gap;i<length;i++){
+                    // 用一个临时变量储存这个元素的值
+                    var temp=this.array[i];
+                    // 储存一下元素的下标  用来找出每组的前一个元素
+                    var j=i;
+                    // 比较大小  如果 前一个元素大于后面的元素就将后面元素的值改变为前面元素的值
+                    while(this.array[j-gap]>temp&&j>gap){
+                        this.array[j]=this.array[j-gap];
+                        j=j-gap;
+                    }
+                    // 将前面元素的值 改为之前存储的后面的值
+                    this.array[j]=temp;
+                }
+                // 间隔减半
+                gap=Math.floor(gap/2);
+            }
+        }
+    }
+    var a1=new ArrayList();
+    a1.insert(1);
+    a1.insert(5648);
+    a1.insert(5550);
+    a1.insert(66);
+    a1.insert(23);
+    alert(a1);
+    a1.shellSort();
+    alert(a1);
+    </script>
+</head>
+<body>
+    优秀的排序算法首要条件就是速度。<br>
+    超越O(n2)时间复杂度的算法
+        <!-- 排序思路:选择一个间隔  然后依照间隔分组  比如间隔是5  那么1-6-11-16就是一组  然后组内排序   后面2-7-12-17也是这样  这样排序完毕之后 每个数字都会距离自己正确的位置越来越近   再将间隔减小  比如设定为间隔为3  再次排序 直到排序间隔为1  间隔为1的时候 就是自己正确的位置 -->
+        <!-- 间隔的选择第一次是n/2  最后一次排序一定是1  -->
+</body>
+</html>

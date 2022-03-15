@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const map=new Map();
+        for(i=0;i<nums.length;i++){
+            const n=nums[i];
+            const n2=target-n;
+            //n2 是键值 是之前存过的 所以下面根据键值获得下标就ok
+            //这个是先减 之后再从前面存储过的键值中查找
+            if(map.has(n2)){
+                //如果map里面有这个键值
+                return [map.get(n2),i];
+                //那么就是这个键值 和 当前数字i
+            }else{
+                map.set(n,i);
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {boolean}
+ */
+var isSameTree = function(p, q) {
+    //如果两个树都没有值那么就返回true
+    if(!p &&!q){return true};
+    //如果都有值 并且p的值和q的值相等 
+    if(p&&q&&p.val===q.val&&
+    //并且树的左子树递归调用此函数
+    isSameTree(p.left,q.left)&&
+    //右子树调用此函数  
+    isSameTree(p.right,q.right)
+    ){
+        //满足返回true
+        return true;
+    }
+    //否则返回false
+    return false;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

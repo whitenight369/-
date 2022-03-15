@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var minWindow = function(s, t) {
+    let l=0;
+    //创建左右指针
+    let r=0;
+    //map储存需要的字符
+    const need=new Map();
+    for(let c of t){
+        //通过遍历字符串的方式将数据存入need的字典中  c是形参=>就是字符串本身 键值就是字符串出现的次数
+        need.set(c,need.has(c)?need.get(c)+1:1);
+    }
+    //Map(3) { 'A' => 1, 'B' => 1, 'C' => 1 }
+    //needType就是出现的长度；
+    let needType=need.size;
+    let res='';
+    //存储长度；
+    while(r<s.length){
+        //右指针的最大值；r是下标 所以一定小于length 最大是length-1
+        const c=s[r];
+        //创建一个变量 用来存储指向的字符；
+        if(need.has(c)){
+            //如果字典中有这个字符
+            need.set(c,need.get(c)-1);
+            //那么就把字典里面的键值（也就是位数-1）；
+            if(need.get(c)===0){needType=needType-1};
+            //如果所有的位数都是0；就开始移动左指针；
+        }
+        while(needType===0){
+            //当位数为0的时候；
+            const newRes=s.substring(l,r+1);
+            //创建一个 新的结果数据  用来和老的比较  就是就是左右指针之间的字符串；
+            if(!res||newRes.length<res.length){res=newRes};
+            //如果老字符串为null或者新字符串的长度小于老字符串  那么老字符串自动更新
+            const c2=s[l];
+            //在创建一个变量 赋值为左指针指向的字符；
+            if(need.has(c2)){
+                //如果字典里面有左指针指向的字符  字典里面更新一个元素 就是c2 位数加一
+                need.set(c2,need.get(c2)+1);
+                if(need.get(c2)===1){needType=needType+1};
+                //如果c2更新后键值是1 那么需要的字符串也加一
+            }
+            l=l+1
+            //左指针前进一位 再开始while循环 判断前进后是否字符串长度变小
+        }
+        r=r+1
+        //右指针前进一位；判断包含全部的t字符串；
+    }
+    return res;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

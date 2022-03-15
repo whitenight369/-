@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function BinarySearchTree(){
+            //内部类保存当前节点的属性
+            function Node(key){
+                this.key=key;
+                this.left=null;
+                this.right=null;
+            }
+
+            //操作方法
+            //insert  插入新的键  外部调用的函数
+            BinarySearchTree.prototype.insert=function(key){
+                var newNode=new Node(key);
+                if(this.root==null){
+                    this.root=newNode
+                }else{
+                    this.insertNode(this.root,newNode);
+                }
+            }
+            //内部实现的方法
+            BinarySearchTree.prototype.insertNode=function(node,newNode){
+                //比较值  后面向左还是向右插入
+                if(newNode.key<node.key){
+                    //如果左边的值为空
+                    if(node.left==null){
+                        //直接插入到左边 赋值就可以
+                        node.left=newNode;
+                    }else{
+                        //不为空的话继续递归进行比较 直到为空然后插入
+                        this.insertNode(node.left,newNode);
+                    }
+                }else{
+                    //插入到右边的话  后面同上。
+                    if(node.right===null){
+                        node.right=newNode;
+                    }else{
+                        this.insertNode(node.right,newNode);
+                    }
+                }
+            }
+
+            //先序遍历     中序遍历   后序遍历---->调换位置
+            var resultString="";
+            function hander(key){
+                resultString+=key+" "
+            }
+        BinarySearchTree.prototype.preOrederTraversal=function(hander){
+            this.preOrederTraversalNode(this.root,hander);
+        }
+        BinarySearchTree.prototype.preOrederTraversalNode=function(node){
+            if(node!=null){
+                hander(node.key)
+                this.preOrederTraversalNode(node.left,hander);
+                this.preOrederTraversalNode(node.right,hander)
+            }
+        }
+        //最大值和最小值
+        BinarySearchTree.prototype.max=function(){
+            var node=this.root;
+            var key=null;
+            while(node!=null){
+                key=node.key
+                node=node.right;
+            }
+            return key;
+        }
+        BinarySearchTree.prototype.min=function(){
+            var node=this.root;
+            var key=null;
+            //如果不加上面的赋值语句 node最后等于null  返回就是null
+            //加上  在后面让他等于node.key时刻更新 等到null的时候不会更新
+            //还保存上次的node的值  所以返回它就ok
+            while(node!=null){
+                key=node.key;
+                node=node.left;
+            }
+            return key;
+        }
+        //搜索特定的值。
+        BinarySearchTree.prototype.search=function(key){
+            var node=this.root;
+            while(node!=null){
+                if(key<node.key){
+                    node=node.left
+                }else if(key>node.key){
+                    node=node.right
+                }else{
+                    return true;
+                }
+            }
+            return false;
+        }
+        //删除节点
+        BinarySearchTree.prototype.remove=function(key){
+            //1.寻找要找到的节点
+            //定义变量  保存一些信息
+            var current=this.root;
+            var parent=null;
+            var isLeftChild=true;
+            //循环 寻找删除的值
+            while(key!=current.key){
+                //保存父节点
+                parent=current;
+                //向左找
+                if(key<current.key){
+                    current=current.left;
+                    isLeftChild=true;
+                }else{
+                    current=current.right;
+                    isLeftChild=false;
+                }
+                //如果到了叶子节点还没找到   就返回false;
+                if(current==null){return false;};
+            }
+            //删除叶子节点;
+            if(!current.left&&!current.right){
+                if(current==this.root){
+                    this.root=null;
+                }else if(isLeftChild){
+                    parent.left=null;
+                }else{
+                    parent.right=null;
+                }
+            }else if(current.right==null){
+                if(current==this.root){
+                    this.root=current.left;
+                }else
+            //删除只有一个节点的节点
+            if(isLeftChild){
+                parent.left=current.left;
+            }else{
+                parent.right=current.left;
+            }
+        }else if(current.left==null){
+            if(current==this.root){
+                this.root=current.right
+            }else
+            if(isLeftChild){
+                parent.left=current.right;
+            }else{
+                parent.right=current.right;
+            }
+        }
+            //删除两个节点的节点
+            //规律:current子节点中最接近current的节点。
+            else{
+                //获取后续节点   
+                //后继节点:在此节点的子节点中比他大但是最接近的节点
+                //前驱:此节点的子节点中比它小但是最接近的节点
+                var successor=this.getSuccessor(current);
+                if(current==this.root){
+                    this.root=successor
+                }else if(isLeftChild){
+                    parent.left=successor;
+                }else{
+                    parent.right=successor
+                }
+                //将删除的节点的左子树赋值给successor
+                successor.left=current.left;
+
+            }
+            return true;
+        }
+            BinarySearchTree.prototype.getSuccessor=function(delNode){
+                //1.使用变量保存临时的节点
+                //找的是后继  所以是.right
+                var successorParent=delNode;
+                var successor=delNode;
+                var current=delNode.right;//从右子树开始找
+                //找节点
+                //当节点的右子树为null结束循环 他就是最接近神的人 
+                while(current!=null){
+                    //保存一下当前节点
+                    successorParent=successor;
+                    successor=current;
+                    //因为这个子节点就一个  子节点没有子节点了 所以把它的左子树赋值给current 后面要用
+                    current=current.left;
+                }
+                //如果子节点还有子节点的话就得这么找了
+                if(successor!=delNode.right){
+                    successorParent.left=successorParent.right;
+                    successor.right=delNode.right;
+                }
+            }
+            
+
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

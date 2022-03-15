@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var RecentCounter=function(){
+    this.q=[];
+};
+RecentCounter.prototype.ping=function(t){
+    this.q.push(t);
+    while(this.q[0]<t-3000){
+        //如果＜就移除  不小于就不移除；
+        this.q.shift();
+    }
+    return this.items.length;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

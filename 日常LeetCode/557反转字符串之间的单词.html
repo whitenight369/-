@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反转字符串之间的单词</title>
+    <script>
+        let str="Let's take LeetCode contest";
+        function toS(s){
+                let p1=s.split(' ');
+                for(let i=0;i<p1.length;i++){
+                    let p2=p1[i].split('');
+                    p2=p2.reverse().join('');
+                    p1[i]=p2;
+                }
+                s=p1.join(' ');
+                return  s;
+                
+        }
+        console.log(toS(str));
+    </script>
+</head>
+<body>
+    <!-- 
+        输入："Let's take LeetCode contest"
+        输出："s'teL ekat edoCteeL tsetnoc"
+     -->
+</body>
+</html>

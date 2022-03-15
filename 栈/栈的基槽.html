@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 封装栈类
+		Stack=function(){
+			// 栈中的属性
+			this.items=[]
+			// 基于数组显示  以数组形式显示栈的内容  数组外包装了栈
+			// 1.压元素入栈
+			// this.push=function(){
+				
+			// }这个不推荐使用
+			Stack.prototype.push=function(element){
+				this.items.push(element)
+			}
+			// 2.从栈中取出元素
+			Stack.prototype.pop=function(){
+				return this.items.pop()
+			}
+			// 3.查看栈元素  不做修改
+			Stack.prototype.peek=function(){
+				return this.items[this.items.length-1]
+			}
+			// 判断是否为空 
+			Stack.prototype.isEmpty=function(){
+				return   this.items.length==0
+			}
+			// 获取元素中的个数
+			Stack.prototype.size=function(){
+				return  this.items.length
+			}
+			// toString
+			Stack.prototype.toString=function(){
+				var resultString="";
+				for(i=1;i<this.items.length;i++){
+					resultString+=this.items[i]=""
+				}
+				return resultString
+			}
+		}
+		var stack=new Stack();
+		console.log(this)
+		stack.push(20);
+		stack.push(999);
+		stack.push(777);
+		stack.push(555);
+		alert(stack)
+		alert(stack.isEmpty())
+		stack.pop()
+		console.log(stack)
+		console.log(stack.toString())
+    </script>
+</body>
+</html>

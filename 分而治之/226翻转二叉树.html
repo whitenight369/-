@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+    //这就是让左右的数值互换 所以只要返回的时候改变一下就行了
+    if(!root){return null;};
+    //如果没有值就返回null
+    return {
+        //返回值互换数据。
+        val:root.val,
+        left:invertTree(root.right),
+        right:invertTree(root.left)
+    }
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

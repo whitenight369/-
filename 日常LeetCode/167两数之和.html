@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两数之和</title>
+    <script>
+        function twoNumberSum(numbers,target){
+            let p1,p2;
+            let res=[];
+            for(let i=0;i<numbers.length;i++){
+                p1=numbers[i];
+                for(let j=i+1;j<numbers.length;j++){
+                    p2=numbers[j];
+                    if(p1+p2==target){
+                        res.push(i+1);
+                        res.push(j+1);
+                    }
+                }
+            }
+            return res;
+        }
+        console.log(twoNumberSum([2,7,11,15],9));
+    </script>
+</head>
+<body>
+    <!-- 
+        给定一个数组  从里面找出来两个元素 相加等于目标值 
+        然后返回两个数字索引组成的数组
+
+     -->
+</body>
+</html>

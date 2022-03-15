@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h3{
+            color: blue;
+            background-color: chartreuse;
+        }
+    </style>
+    <script>
+        //创建一个大的构造器函数
+        function DoubleLink(){
+            //里面创建一个小的构造器函数用于做添加数据的准备
+            function Node(data){
+                this.next=null;
+                this.data=data;
+                this.prev=null;
+            }
+            this.head=null;
+            this.tail=null;
+            this.length=0;
+
+
+            //往链表里面添加数据
+            DoubleLink.prototype.append=function(data){
+                var newNode=new Node(data);//准备数据  给数据添加链表应有的属性;
+                //分情况添加   1.链表为空 直接就是head了
+                if(!this.head){
+                    //因为只有链表只有一个值  所以头尾都是他  head和tail是链表的属性 链表中元素的属性是next和prev
+                    this.head=newNode;
+                    this.tail=newNode;
+                }else{
+                    //链表中有其他数据 原本尾巴的链表元素的next指向新元素
+                    this.tail.next=newNode;
+                    //被添加进去的元素的prev指向原本的尾巴  他变成现在的尾巴
+                    newNode.prev=this.tail;
+                    this.tail=newNode;
+                }
+                this.length++//长度加一
+            }
+
+
+            //移除链表元素
+            DoubleLink.prototype.removeAt=function(position){
+                //如果只有一个元素 就头尾变成null就ok
+                if(this.length==1){
+                    this.head=null;
+                    this.tail=null;
+                    //移除尾部元素
+                }else{ 
+                    if(position==0){
+                        //原本的头变成null
+                        this.head.next.prev=null;
+                        //第二个元素变成头
+                        this.head=this.head.next;
+                    }else
+                    //移除尾部元素
+                    if(position==this.length-1){
+                    //这条链表的尾巴的上一个的下一个 特指位置 就是最后一个元素 变成null
+                    this.tail.prev.next=null;
+                    //链表尾巴变成原来尾巴的上一个元素  就是倒数第二个元素
+                    this.tail=this.tail.prev;
+                    //在中间移除元素
+                }else{
+                    //设置一个指针指向链表的头部
+                    var current=this.head;
+                    //指针的位置  
+                    var index=0;
+                    //指针如果小于位置（下标）的话 就一直向下挪移
+                    while(index++<position){
+                        current=current.next;
+                    }
+                    //删除元素的下一个的上一个元素 变成他的上一个
+                    current.next.prev=current.prev;
+                //由于是双向的 所以被删除元素的上一个元素的next属性指向被删除元素的下一个
+                    current.prev.next=current.next;
+                }
+            }
+                this.length--;
+            }
+
+
+            //从前向后遍历
+            DoubleLink.prototype.backward=function(){
+                var current=this.head;
+                var str='';
+                //有数据就一直向后走就ok
+                while(current){
+                    str+=current.data+' ';
+                    current=current.next;
+                }
+                return str;
+            }
+
+            //从后向前遍历
+            DoubleLink.prototype.forward=function(){
+            var current=this.tail;
+            var str="";
+            //有数据就一直向前走
+            while(current){
+                str=str+current.data+' ';
+                current=current.prev;
+            }
+            return str;
+            }
+
+            //变成字符串就是遍历一遍呗  所以调用遍历函数就行
+            DoubleLink.prototype.toString=function(){
+               return this.backward();
+            }
+
+            //向指定位置添加链表元素  参数是添加位置和参数的data
+            DoubleLink.prototype.insert=function(position,data){
+                var newNode=new Node(data);
+                //下标没有小于0的  也不能向大于长度的位置添加数据 所以直接报错;
+                if(position<0||position>this.length){
+                    return false;
+                }
+                //情况一   空数组;
+                if(!this.head){
+                    this.head=newNode;
+                    this.tail=newNode;
+                }else{
+                    //情况二 表头插入数据
+                    if(position==0){
+                        //因为表头的prev本来就是null  所以直接赋值就行；
+                        this.head.prev=newNode;
+                        //新节点的下一个变成原来的表头
+                        newNode.next=this.head;
+                        //新节点变成表头
+                        this.head=newNode;
+                    }else if(position==this.length){
+                        //尾巴插入数据
+                        this.tail.next=newNode;
+                        //尾巴的下一个指向新节点  新节点的prev指向尾巴 双向链表 尾巴变成新节点
+                        newNode.prev=this.tail;
+                        this.tail=newNode;
+                    }else{
+                        //中间插入数据
+                        //和之前删除找位置一样  找到位置之后上下变更关系
+                        var current=this.head;
+                        var index=0;
+                        while(index++<position){
+                            current=current.next;
+                        }
+                        newNode.next=current;
+                        newNode.prev=current.prev;
+                        current.prev.next=newNode;
+                        current.prev=newNode;
+                    }
+                }
+                this.length++;
+                return true;
+            }
+
+            //检索链表
+            DoubleLink.prototype.indexOf=function(data){
+                var current=this.head;
+                var index=0;
+                while(current){
+                    //如果找到相同的就返回下标
+                    if(current.data==data){
+                        return index;
+                    }
+                    // 指针向后位移一个同时下标加一 
+                    current=current.next;
+                    index++;
+                }
+                //循环结束都没找到 就返回-1;
+                return -1;
+            }
+
+            //获取元素对应的内容;根据位置找内容
+            DoubleLink.prototype.get=function(position){
+                //和上面的基本上没啥区别；
+                var current=this.head;
+                var index=0;
+                while(index++<position){
+                    current=current.next;
+                }
+                return current.data;
+            }
+
+            //修改某个位置的内容  就是找到位置  改变内容就okk
+            DoubleLink.prototype.updata=function(position,newData){
+                var current=this.head;
+                var index=0; 
+                while(index++<position){
+                    current=current.next;
+                }
+                //更新资料 上面就不说了
+                current.data=newData;
+                return current.data;
+            }
+
+        }
+        var a=new DoubleLink;
+        a.append('aaa');
+        a.append('bbb');
+        a.append('ccc');
+        console.log(a);
+        console.log(a.toString());
+        console.log(a.forward());
+        console.log(a.backward());
+    </script>
+</head>
+<body>
+    <h3>ppt的图挺好的   配合看就很赞</h3>
+     <!-- 老八出品 一定简单易懂 但是不一定是精品 哈哈哈 -->
+</body>
+</html>

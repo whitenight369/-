@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const json={
+            a:{b:{c:1}},
+            d:[1,2],
+        };
+        const dfs=(n)=>{
+            console.log(n);
+            Object.keys(n).forEach(k=>{
+                //n是json k是每个节点
+                dfs(n[k]);
+            });
+        };
+        dfs(json);
+        const dfs1=(n,path)=>{
+            console.log(n);
+            Object.keys(n).forEach(k=>{
+                //n是json k是每个节点
+                dfs1(n[k],path.concat(k));
+                //path就是节点的内容；
+            });
+        };
+        dfs1(json,[]);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

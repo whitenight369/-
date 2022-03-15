@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const graph={
+            0:[1,2],
+            1:[2],
+            2:[0,3],
+            3:[3]
+        }
+        const visited=new Set();
+        //集合的属性 无序且唯一 所以访问过的加不进来了 
+        visited.add(2);
+        //一开始集合是空的 所以把头添加进去
+        const q=[2];
+        //从2开始
+        while(q.length){
+            //把头部移除
+            const n=q.shift();
+            //打印头部
+            console.log(n);
+            
+            //遍历n的子元素
+            graph[n].forEach(c=>{
+                //如果visited集合中没有这个数 就要添加进来 并且把子元素添加进q去
+                if(!visited.has(c)){
+                    q.push(c);
+                    visited.add(c);
+                }
+                //要是已经遍历过这个节点的话 就不会添加进去了
+            })
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

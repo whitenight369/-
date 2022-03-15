@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * @param {number[][]} heights
+ * @return {number[][]}
+ */
+var pacificAtlantic = function(heights) {
+    if(!heights||!heights[0]){return [];};
+    //获取矩阵的高度-->数组的元素个数
+    const m=heights.length;
+    //获取矩阵的宽度-->角标0的数组的长度
+    const n=heights[0].length;
+    //假如所有的都不可以留到海岸线；
+    const flow1=Array.from({length:m},  ()=>new Array(n).fill(false));
+    const flow2=Array.from({length:m},  ()=>new Array(n).fill(false));
+    //遍历矩阵
+    const dfs=(r,c,flow)=>{
+        flow[r][c]=true;
+        //上下左右挨个试探
+        [[r-1,c],[r+1,c],[r,c-1],[r,c+1]].forEach(([nr,nc])=>{
+            if(
+                //保证在矩阵中
+                nr>=0&&nr<m&&
+                nc>=0&&nc<n&&
+                //防止死循环
+                !flow[nr][nc]&&
+                //保证逆流而上
+                heights[nr][nc]>=heights[r][c]
+            ){
+                dfs(nr,nc,flow);
+            }
+        });
+    };
+    //沿着海岸线逆流而上
+    for(let r=0;r<m;r++){
+        dfs(r,0,flow1);
+        dfs(r,n-1,flow2);
+    }
+    for(let c=0;c<n;c++){
+        dfs(0,c,flow1);
+        dfs(m-1,c,flow2);
+    }
+    //收集能到两个海岸线的坐标
+    const res=[];
+    for(let r=0;r<m;r++){
+        for(let c=0;c<n;c++){
+            if(flow1[r][c]&&flow2[r][c]){
+                res.push([r,c]);
+            }
+        }
+    }
+    return res;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

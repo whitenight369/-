@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class MinHeap{
+            constructor(){
+                this.heap=[];
+            }
+            swap(i1,i2){
+                const temp=this.heap[i1];
+                this.heap[i1]=this.heap[i2];
+                this.heap[i2]=temp;
+            }
+            getParentIndex(i){
+                return Math.floor((i-1)/2);
+            }
+            getLeftIndex(i){
+                return i*2+1;
+            }
+            getRightIndex(i){
+                return i*2+2;
+            }
+            shiftUp(index){
+                if(index==0){return;};
+                const parentIndex=this.getParentIndex(index);
+                if(this.heap[parentIndex]&&this.heap[parentIndex].val>this.heap[index].val){
+                    this.swap(parentIndex,index);
+                    //递归比较然后上移
+                    this.shiftUp(parentIndex);
+                }
+            }
+            shiftDown(index){
+                const leftIndex=this.getLeftIndex(index);
+                const rightIndex=this.getRightIndex(index);
+                if(this.heap[leftIndex]&&this.heap[leftIndex].val<this.heap[index].val){
+                    this.swap(leftIndex,index);
+                    this.shiftDown(leftIndex);
+                }
+                if(this.heap[rightIndex]&&this.heap[rightIndex].val<this.heap[index].val){
+                    this.swap(rightIndex,index);
+                    this.shiftDown(rightIndex);
+                }
+            }
+            insert(value){
+                this.heap.push(value);
+                this.shiftUp(this.heap.length-1);
+            }
+            //删除堆顶  用数组尾部元素替换堆顶(直接删除堆顶会破坏堆结构)
+            //然后下移:将新堆顶和他的子节点交换至子节点大于等于这个新堆顶
+            //大小为k的时间复杂度O（logk）
+            pop(){
+                if(this.size()==1){return this.heap.shift()};
+                const top=this.heap[0];
+                this.heap[0]=this.heap.pop();
+                this.shiftDown(0);
+                return top;
+            }
+            peek(){
+                return this.heap[0];
+            }
+            size(){
+                return this.heap.length;
+            }
+        } 
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode[]} lists
+ * @return {ListNode}
+ */
+var mergeKLists = function(lists) {
+    //创建一个新的链表用来储存最后的结果
+     const res=new ListNode(0);
+     //p是结果链表的指针
+     let p=res;
+     //创建一个最小堆 -->用来比较大小并且排序
+     const h=new MinHeap();
+     //将lists中的链表哦都加到h中去 l是每个链表；加入的是链表的队头 并不是整个链表 因为之前写过最小堆的逻辑 所以会自动排序
+     lists.forEach(l=>{
+         if(l){h.insert(l)};
+     });
+     //当最小堆还有数据的时候
+     while(h.size()){
+         //弹出最小堆的头部
+         const n=h.pop();
+         //res的下一个元素就是最小堆弹出的元素
+         p.next=n;
+         //将p移到下一个的空位置
+         p=p.next;
+         //因为之前踢出去的是链表的队头  所以把这个链表的第二 当做队头加到最小堆里面 从新排序；
+         if(n.next){h.insert(n.next)};
+     }
+     return res.next;
+};
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

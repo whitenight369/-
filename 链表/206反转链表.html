@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function ListNode(val){
+            this.val=val;
+            this.next=null;
+        }
+        var reverseList=function(head){
+            let p1=head;
+            let p2=null;
+            while(p1){
+                const tmp=p1.next;
+                //tmp就是p1后面的元素2345
+                p1.next=p2;
+                //第一次将p2赋值给p1.next是为了中断循环-->p1.next是2345null
+                p2=p1;
+                //指针后移
+                p1=tmp;
+            }
+            return p2;
+            //指向p2是因为 p2指向的是链表的头部 
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

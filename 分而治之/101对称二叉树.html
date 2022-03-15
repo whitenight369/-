@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function(root) {
+    if(!root){return true;};
+    const isMirror=(l,r)=>{
+        //如果左右都是空的就是true
+        if(!l&&!r){return true;};
+        //把左右子树穿进去 然后开始递归  先比较val值 
+        if(l&&r&&l.val===r.val&&
+        //比较左子树的左边和右子树的右边
+        isMirror(l.left,r.right)&&
+        //左子树的右边和右子树的左边。
+        isMirror(l.right,r.left)
+        ){
+            //相同就返回ture
+            return true;
+        }
+        //不同就返回false
+        return false;
+    }
+    return isMirror(root.left,root.right);
+};
+    </script>
+</head>
+<body>
+    <!--空间复杂度O（n）  -->
+</body>
+</html>

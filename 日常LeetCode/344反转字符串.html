@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>反转字符串</title>
+    <script>
+        // 只能用给的数组  不能自己创建新的数组  使用O(1)的额外空间解决
+        function reserveString(s){  
+            const len=s.length;
+            for(let left=0,right=len-1;left<right;left++,right--){
+                let tmp=s[left];
+                s[left]=s[right];
+                s[right]=tmp;
+            }
+            return s;
+        }
+        console.log(reserveString(['h','e','l','l','o']));
+    </script>
+</head>
+<body>
+    <!-- 
+        将字符串反转输出    reserve的原生js  
+        面试的时候: 
+                面试官 :写一个函数用来反转字符串
+                我:function reverseString(s){
+                    s.reserve();
+                }
+                面试官:滚!
+    -->
+</body>
+</html>
